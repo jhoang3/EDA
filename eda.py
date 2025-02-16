@@ -16,6 +16,8 @@ df = kagglehub.load_dataset(
   "VNL2023.csv",  
 )
 
+# 1. Data Understanding
+
 # print(df.head())
 # print(df.info()) # shows the data types of each column, all good
 # print(df.describe()) # shows the statistics of the data
@@ -28,6 +30,17 @@ df = kagglehub.load_dataset(
 
 # print(df.query('Age < 21').count()) # 0 rows with age < 21
 
+
+# sns.pairplot(noStrs, vars = ['Age', 'Attack', 
+#                             #  'Block', 'Serve', 'Set', 
+#                              'Dig', 'Receive'])
+
+# sns.scatterplot(noStrs, x = "Block", y = "Attack")
+# sns.displot(df, x="Country") # displot is for categorical data, shows the counts of each country
+
+# plt.show()
+
+# 2. Data Preparation
 # can use py -i eda.py to run interactively
 # can run df.columns to get all column names to use if needed, its needed
 noStrs = df[[
@@ -36,13 +49,11 @@ noStrs = df[[
                 'Age', 'Attack', 'Block', 'Serve', 'Set', 'Dig',
                 'Receive', 
                 # 'Position'
-                ]].copy()
+                ]].copy() # copy dataset with only numerical values
+# can also say df.drop(['...'], axis = 1) to drop columns
 
-# sns.pairplot(noStrs, vars = ['Age', 'Attack', 
-#                             #  'Block', 'Serve', 'Set', 
-#                              'Dig', 'Receive'])
+# can also do df.rename(columns= {'ogName': 'newName'}) to rename columns
 
-sns.scatterplot(noStrs, x = "Block", y = "Attack")
-sns.displot(df, x="Country") # displot is for categorical data, shows the counts of each country
+# remove duplicates ex: df.loc[~df.duplicated(subset=['col1', 'col2'])].reset_index
+    # ~ is the not operator, so it will return all rows that are not duplicates based on the subset
 
-plt.show()
