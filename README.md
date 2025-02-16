@@ -1,2 +1,2 @@
 # EDA
-EDA project. Cleaning and analyzing data on VNL 2023.
+EDA project. Cleaning and analyzing data on VNL 2023. Help
