@@ -22,3 +22,27 @@ df = kagglehub.load_dataset(
 
 # check nulls
 # print(df.isnull().sum()) # prints number of nulls
+
+# check duplicates
+# print(df.duplicated().sum()) # returned 0 duplicates
+
+# print(df.query('Age < 21').count()) # 0 rows with age < 21
+
+# can use py -i eda.py to run interactively
+# can run df.columns to get all column names to use if needed, its needed
+noStrs = df[[
+                # 'Player', 
+                # 'Country', 
+                'Age', 'Attack', 'Block', 'Serve', 'Set', 'Dig',
+                'Receive', 
+                # 'Position'
+                ]].copy()
+
+# sns.pairplot(noStrs, vars = ['Age', 'Attack', 
+#                             #  'Block', 'Serve', 'Set', 
+#                              'Dig', 'Receive'])
+
+sns.scatterplot(noStrs, x = "Block", y = "Attack")
+sns.displot(df, x="Country") # displot is for categorical data, shows the counts of each country
+
+plt.show()
