@@ -97,3 +97,50 @@ noStrs = df[[
 # sns.heatmap(noStrs.corr(), annot=True)
 # plt.show()
 
+# 5. Ask a question
+
+# my question: What are the top 5 countries in each category (Attack, Block, Set, Dig, Receive)?
+
+# df.groupby('Country')['Attack'].agg(['mean'])\
+#     .sort_values(by='mean', ascending=False)\
+#     .head(5).plot(kind='bar', title='Top 5 Countries by Attack')
+# plt.show()
+
+# df.groupby('Country')['Block'].agg(['mean'])\
+#     .sort_values(by='mean', ascending=False)\
+#     .head(5).plot(kind='bar', title='Top 5 Countries by Block')
+# plt.show()
+# df.groupby('Country')['Set'].agg(['mean'])\
+#     .sort_values(by='mean', ascending=False)\
+#     .head(5).plot(kind='bar', title='Top 5 Countries by Set')
+# plt.show()
+# df.groupby('Country')['Dig'].agg(['mean'])\
+#     .sort_values(by='mean', ascending=False)\
+#     .head(5).plot(kind='bar', title='Top 5 Countries by Dig')
+# plt.show()
+# df.groupby('Country')['Receive'].agg(['mean'])\
+#     .sort_values(by='mean', ascending=False)\
+#     .head(5).plot(kind='bar', title='Top 5 Countries by Receive')
+# plt.show()
+
+# group the data by country -> look at the attack col -> get the mean and 
+# sort by descending mean
+
+# try to find the top 5 overall by averaging attack, block, set, dig, receive 
+df['Overall'] = df[['Attack', 'Block', 'Set', 'Dig', 'Receive']].mean(axis=1)
+# ^ this creates a new column called overall that is the average of the 5 specified columns
+print(df.groupby('Country')['Overall'].agg(['mean'])
+    .sort_values(by='mean', ascending=False)
+    .head(5))
+    # .plot(kind='bar', title='Top 5 Countries Overall'))
+# .agg is used to specify the aggregation function, in this case mean, can be sum, count, etc
+
+# what is the top player for each country given their overall score
+print(df.loc[df.groupby('Country')['Overall'].idxmax()][['Country', 'Player', 'Overall']].sort_values(by='Overall', ascending=False))
+
+# what this does: .loc selects [row][col] to view
+    # df.groupby('Country') groups all countries together
+        # ['Overall'] views the overall score column
+            # .idmax() gets the index of the max value for each country
+                # so .loc will get the row of the max value for each country
+    # [['Country', 'Player', 'Overall']] selects the columns we want to display

@@ -14,3 +14,8 @@ Look at each feature themselves to understand distribution and potential outlier
 
 ### 4 - Feature Relationships
 Look at features together to understand relationships between them. Multivariate analysis with scatterplots, heatmaps, pairplots.
+
+### 5 - Ask a Question
+After visualizing the data and statistics, try to draw up a question to be answered from the dataset.
+
+After everything, one can begin to perform more advanced statistical analysis with machine learning models or other forms of analysis.
